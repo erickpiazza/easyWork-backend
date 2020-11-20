@@ -7,7 +7,6 @@ export default class ProviderAvatarController {
     const updateProviderAvatarService = container.resolve(
       UpdateProviderAvatarService,
     );
-    console.log(request.file.filename);
     const provider = await updateProviderAvatarService.execute({
       user_id: request.user.id,
       avatarFileName: request.file.filename,
