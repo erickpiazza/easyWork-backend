@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import UpdateProviderCoverService from '@modules/providers/services/UpdateProviderCoverService';
+import { classToClass } from 'class-transformer';
 
 export default class ProviderCoverController {
   public async update(request: Request, response: Response): Promise<Response> {
@@ -12,8 +13,6 @@ export default class ProviderCoverController {
       coverFileName: request.file.filename,
     });
 
-    // delete user.password;
-
-    return response.json(provider);
+    return response.json(classToClass(provider));
   }
 }
