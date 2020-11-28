@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity('providers')
 class Provider {
@@ -60,6 +60,16 @@ class Provider {
 
   @UpdateDateColumn()
   update_at: Date;
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    return this.avatar ? `http://192.168.0.20:3333/files/${this.avatar}` : null;
+  }
+
+  @Expose({ name: 'cover_url' })
+  getCoverUrl(): string | null {
+    return this.cover ? `http://192.168.0.20:3333/files/${this.cover}` : null;
+  }
 }
 
 export default Provider;
