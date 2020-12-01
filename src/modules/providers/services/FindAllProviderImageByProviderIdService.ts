@@ -3,7 +3,7 @@ import ProviderImagens from '../infra/typeorm/entities/ProviderImagens';
 import IProviderImagesRepository from '../repositories/IProviderImagesRepository';
 
 interface Request {
-  user_id: string
+  user_id: string;
 }
 @injectable()
 class FindAllProviderImageByProviderIdService {
@@ -13,9 +13,11 @@ class FindAllProviderImageByProviderIdService {
   ) {}
 
   public async execute({
-    user_id
-  }: Request): Promise<ProviderImagens[]|undefined> {
-    const providerImage = await this.providerImageRepository.findAllById(user_id);
+    user_id,
+  }: Request): Promise<ProviderImagens[] | undefined> {
+    const providerImage = await this.providerImageRepository.findAllById(
+      user_id,
+    );
 
     return providerImage;
   }

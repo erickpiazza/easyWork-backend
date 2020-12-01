@@ -19,6 +19,8 @@ const providerImageController = new ProviderImageController();
 
 providersRouter.post('/', providersController.create);
 
+providersRouter.get('/', ensureAuthenticated, providersController.get);
+
 providersRouter.post(
   '/imagens',
   ensureAuthenticated,
@@ -32,7 +34,7 @@ providersRouter.get(
   providerImageController.findAllByid,
 );
 
-providersRouter.patch(
+providersRouter.put(
   '/profile',
   ensureAuthenticated,
   providersController.update,

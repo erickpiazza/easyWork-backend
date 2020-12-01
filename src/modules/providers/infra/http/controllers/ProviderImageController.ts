@@ -31,7 +31,6 @@ export default class ProviderImageController {
     const providerImages = await getProviderImageService.execute({
       user_id: request.user.id,
     });
-    console.log('providerImages', classToClass(providerImages));
 
     return response.json(classToClass(providerImages));
   }

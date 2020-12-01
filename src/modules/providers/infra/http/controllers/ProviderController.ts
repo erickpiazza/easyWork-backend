@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateProviderService from '@modules/providers/services/CreateProviderService';
 import UpdateProfileProviderService from '@modules/providers/services/UpdateProfileProviderService';
 import { classToClass } from 'class-transformer';
+import FindProviderService from '@modules/providers/services/FindProviderServider';
 
 export default class ProvidersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -27,6 +28,14 @@ export default class ProvidersController {
       data,
     );
 
-    return response.json(provider);
+    return response.json(classToClass(provider));
+  }
+
+  public async get(request: Request, response: Response): Promise<Response> {
+    const findProvider = container.resolve(FindProviderService);
+
+    const provider = await findProvider.execute();
+
+    return response.json(classToClass(provider));
   }
 }

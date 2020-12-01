@@ -43,6 +43,12 @@ class ProvidersRepository implements IProvidersRepository {
 
     return findAppointment;
   }
+
+  public async find(): Promise<Provider[] | undefined> {
+    const findAppointment = await this.ormRepository.find();
+
+    return findAppointment;
+  }
 }
 
 export default ProvidersRepository;

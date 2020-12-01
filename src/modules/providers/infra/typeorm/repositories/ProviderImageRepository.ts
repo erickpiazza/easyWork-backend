@@ -14,7 +14,7 @@ class ProviderImageRepository implements IProviderImagesRepository {
 
   public async findAllById(id: string): Promise<ProviderImagens[] | undefined> {
     const provider = await this.ormRepository.find({ where:{provider_id : id}});
-    console.log('provider',provider)
+
 
     return provider;
   }
