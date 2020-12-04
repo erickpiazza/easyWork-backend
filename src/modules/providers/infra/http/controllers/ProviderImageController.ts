@@ -20,16 +20,33 @@ export default class ProviderImageController {
     return response.json({ ok: true });
   }
 
+  public async findAllByUserLoged(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    console.log('teESTTTTTEE');
+    const getProviderImageService = container.resolve(
+      FindAllProviderImageByProviderIdService,
+    );
+    const providerImages = await getProviderImageService.execute({
+      user_id: request.user.id,
+    });
+
+    return response.json(classToClass(providerImages));
+  }
+
   public async findAllByid(
     request: Request,
     response: Response,
   ): Promise<Response> {
+    const { id } = request.params;
+
     const getProviderImageService = container.resolve(
       FindAllProviderImageByProviderIdService,
     );
 
     const providerImages = await getProviderImageService.execute({
-      user_id: request.user.id,
+      user_id: id,
     });
 
     return response.json(classToClass(providerImages));

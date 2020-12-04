@@ -20,6 +20,11 @@ const providerImageController = new ProviderImageController();
 providersRouter.post('/', providersController.create);
 
 providersRouter.get('/', ensureAuthenticated, providersController.get);
+providersRouter.get(
+  '/provider-id/:id',
+  ensureAuthenticated,
+  providersController.getById,
+);
 
 providersRouter.post(
   '/imagens',
@@ -30,6 +35,12 @@ providersRouter.post(
 
 providersRouter.get(
   '/imagens',
+  ensureAuthenticated,
+  providerImageController.findAllByUserLoged,
+);
+
+providersRouter.get(
+  '/imagens/:id',
   ensureAuthenticated,
   providerImageController.findAllByid,
 );

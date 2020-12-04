@@ -4,6 +4,7 @@ import CreateProviderService from '@modules/providers/services/CreateProviderSer
 import UpdateProfileProviderService from '@modules/providers/services/UpdateProfileProviderService';
 import { classToClass } from 'class-transformer';
 import FindProviderService from '@modules/providers/services/FindProviderServider';
+import FindByIdProviderService from '@modules/providers/services/FindByIdProviderServider';
 
 export default class ProvidersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -35,6 +36,18 @@ export default class ProvidersController {
     const findProvider = container.resolve(FindProviderService);
 
     const provider = await findProvider.execute();
+
+    return response.json(classToClass(provider));
+  }
+
+  public async getById(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.params;
+    const findByIdProvider = container.resolve(FindByIdProviderService);
+
+    const provider = await findByIdProvider.execute(id);
 
     return response.json(classToClass(provider));
   }

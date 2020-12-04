@@ -35,7 +35,7 @@ class ProviderImagens {
 
   @Expose({ name: 'image_url' })
   getImageUrl(): string {
-    return `http://192.168.0.20:3333/files/${this.imageUrl}`;
+    return `http://192.168.0.26:3333/files/${this.imageUrl}`;
   }
 }
 
