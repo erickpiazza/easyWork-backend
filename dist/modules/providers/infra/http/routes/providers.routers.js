@@ -1,29 +1,42 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var multer_1 = __importDefault(require("multer"));
-var upload_1 = __importDefault(require("@config/upload"));
-var ProviderController_1 = __importDefault(require("../controllers/ProviderController"));
-var ProviderAvatarController_1 = __importDefault(require("../controllers/ProviderAvatarController"));
-var ProviderCoverController_1 = __importDefault(require("../controllers/ProviderCoverController"));
-var ProviderImageController_1 = __importDefault(require("../controllers/ProviderImageController"));
-var ensureAuthenticated_1 = __importDefault(require("../middlewares/ensureAuthenticated"));
-var providersRouter = express_1.Router();
-var upload = multer_1.default(upload_1.default);
-var providersController = new ProviderController_1.default();
-var providerAvatarController = new ProviderAvatarController_1.default();
-var providerCoverController = new ProviderCoverController_1.default();
-var providerImageController = new ProviderImageController_1.default();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = require("express");
+
+var _multer = _interopRequireDefault(require("multer"));
+
+var _upload = _interopRequireDefault(require("../../../../../config/upload"));
+
+var _ProviderController = _interopRequireDefault(require("../controllers/ProviderController"));
+
+var _ProviderAvatarController = _interopRequireDefault(require("../controllers/ProviderAvatarController"));
+
+var _ProviderCoverController = _interopRequireDefault(require("../controllers/ProviderCoverController"));
+
+var _ProviderImageController = _interopRequireDefault(require("../controllers/ProviderImageController"));
+
+var _ensureAuthenticated = _interopRequireDefault(require("../middlewares/ensureAuthenticated"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const providersRouter = (0, _express.Router)();
+const upload = (0, _multer.default)(_upload.default);
+const providersController = new _ProviderController.default();
+const providerAvatarController = new _ProviderAvatarController.default();
+const providerCoverController = new _ProviderCoverController.default();
+const providerImageController = new _ProviderImageController.default();
 providersRouter.post('/', providersController.create);
-providersRouter.get('/', ensureAuthenticated_1.default, providersController.get);
-providersRouter.get('/:id', ensureAuthenticated_1.default, providersController.getById);
-providersRouter.post('/imagens', ensureAuthenticated_1.default, upload.array('images'), providerImageController.create);
-providersRouter.get('/imagens', ensureAuthenticated_1.default, providerImageController.findAllByUserLoged);
-providersRouter.get('/imagens/:id', ensureAuthenticated_1.default, providerImageController.findAllByid);
-providersRouter.put('/profile', ensureAuthenticated_1.default, providersController.update);
-providersRouter.patch('/avatar', ensureAuthenticated_1.default, upload.single('avatar'), providerAvatarController.update);
-providersRouter.patch('/cover', ensureAuthenticated_1.default, upload.single('cover'), providerCoverController.update);
-exports.default = providersRouter;
+providersRouter.get('/', _ensureAuthenticated.default, providersController.get);
+providersRouter.get('/provider-id/:id', _ensureAuthenticated.default, providersController.getById);
+providersRouter.post('/imagens', _ensureAuthenticated.default, upload.array('images'), providerImageController.create);
+providersRouter.get('/imagens', _ensureAuthenticated.default, providerImageController.findAllByUserLoged);
+providersRouter.get('/imagens/:id', _ensureAuthenticated.default, providerImageController.findAllByid);
+providersRouter.put('/profile', _ensureAuthenticated.default, providersController.update);
+providersRouter.patch('/avatar', _ensureAuthenticated.default, upload.single('avatar'), providerAvatarController.update);
+providersRouter.patch('/cover', _ensureAuthenticated.default, upload.single('cover'), providerCoverController.update);
+var _default = providersRouter;
+exports.default = _default;

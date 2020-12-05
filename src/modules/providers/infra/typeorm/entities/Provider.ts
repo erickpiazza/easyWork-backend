@@ -63,12 +63,14 @@ class Provider {
 
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
-    return this.avatar ? `http://192.168.0.26:3333/files/${this.avatar}` : null;
+    return this.avatar
+      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      : null;
   }
 
   @Expose({ name: 'cover_url' })
   getCoverUrl(): string | null {
-    return this.cover ? `http://192.168.0.26:3333/files/${this.cover}` : null;
+    return this.cover ? `${process.env.APP_API_URL}/files/${this.cover}` : null;
   }
 }
 
